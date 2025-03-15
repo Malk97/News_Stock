@@ -15,20 +15,25 @@ This project is an end-to-end MLOps pipeline for analyzing financial news, ranki
 - **PRAW (Python Reddit API Wrapper)**
 - **NLTK for text preprocessing**
 - **Streamlit for dashboard**
-- **AWS (S3, EC2, Lambda) for MLOps**
+- **AWS (S3, EC2) for MLOps**
 - **NewsAPI for news fetching**
 
 ## Project Structure
 ```
 .
-├── Model
-│   ├── model.py                # Reddit-based ranking model
-│   ├── fine_tuning_notebook    # Notebook for fine-tuning last layers
-├── ranking.py                  # Ranking algorithm
-├── dataprocess.py               # Preprocessing text
-├── main.py                      # Streamlit dashboard
+├── News_Stock
+├── models           # Higher storage so you need to run 
+├── Notebook
+│   ├── EDA.ipynb
+│   ├── Inference.ipynb
+│   ├── Model.ipynb
+├── Data
+├── src
+│   ├── ranking.py                  # Ranking algorithm
+│   ├── Data_preprocess.py            # Preprocessing text
+│   ├── main.py                      # Streamlit dashboard
+│   ├── Model.py                     
 ├── requirements.txt             # Dependencies
-├── .env                         # API keys & credentials (ignored in GitHub)
 └── README.md                    # This file
 ```
 
@@ -63,7 +68,7 @@ This project is an end-to-end MLOps pipeline for analyzing financial news, ranki
    ```
 
 ## Deployment
-- The system is deployed on AWS using EC2, S3, and Lambda.
+- The system is deployed on AWS using EC2, S3.
 - The model and fine-tuning components are stored in S3 and loaded dynamically.
 - The Streamlit app is hosted on EC2 with automatic updates from the repository.
 
