@@ -2,18 +2,18 @@ import streamlit as st
 import pandas as pd
 import requests
 import os
-from Model import load_model_and_tokenizer, predict_class
+from Model import load_model_from_s3, predict_class
 from ranking import ranking
 from dotenv import load_dotenv
 import ast
-
+BUCKET_NAME = "data-storage-bucket-123" 
+MODEL_PATH_IN_S3 = "Model/"  
 load_dotenv()
 
 # Load model and tokenizer
 model_path = os.getenv('MODEL_PATH')
 NEWSAPI_KEY = os.getenv("NEWSAPI_KEY")
-model_path = os.path.join(model_path, 'models/Model')
-model, tokenizer = load_model_and_tokenizer(model_path)
+model, tokenizer = load_model_from_s3(BUCKET_NAME, MODEL_PATH_IN_S3)
 
 # Define source credibility dictionary
 SOURCE_CREDIBILITY_DICT = {
