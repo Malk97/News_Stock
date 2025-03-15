@@ -1,12 +1,23 @@
 from Data_preprocess import preprocess_text
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
+import boto3
+BUCKET_NAME = "data-storage-bucket-123" 
+MODEL_PATH_IN_S3 = "Model/" 
 
-def load_model_and_tokenizer(model_path: str):
-    """
-    Load the model and tokenizer from the given path.
-    """
-    model = AutoModelForSequenceClassification.from_pretrained(model_path)
-    tokenizer = AutoTokenizer.from_pretrained(model_path)
+def load_model_from_s3(bucket_name, model_path_in_s3):
+    model_file = io.BytesIO()
+    tokenizer_file = io.BytesIO()
+    
+    s3_client.download_fileobj(bucket_name, model_path_in_s3 + 'pytorch_model.bin', model_file)
+    
+    s3_client.download_fileobj(bucket_name, model_path_in_s3 + 'tokenizer.json', tokenizer_file)
+    
+    model_file.seek(0)
+    model = AutoModelForSequenceClassification.from_pretrained(model_file)
+    
+    tokenizer_file.seek(0)
+    tokenizer = AutoTokenizer.from_pretrained(tokenizer_file)
+    
     return model, tokenizer
 
 def predict_class(text: str, model, tokenizer):
