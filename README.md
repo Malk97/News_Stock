@@ -1,4 +1,4 @@
-# Financial News Analysis and Ranking System
+# [Financial News Analysis and Ranking System](http://3.84.211.98:8501/)
 
 ## Overview
 This project is an end-to-end MLOps pipeline for analyzing financial news, ranking articles based on their investment impact, and deploying the application using AWS. The system integrates multiple components, including data preprocessing, sentiment analysis, ranking algorithms, and a Streamlit-based dashboard for visualization.
